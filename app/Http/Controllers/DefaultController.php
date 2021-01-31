@@ -16,11 +16,10 @@ class DefaultController extends Controller
         $arr= [];
         $arr['command'] = $command;
         exec ('kill ' . Setting::get ('pid'));
-        $process = new Process(explode(" ",$command));
-        $process->start();
+        $arr['output']=shell_exec ($command . " 2>&1; echo $?");
         $arr['pid'] = $process->getPid ();
         $output = $process->getOutput();
-        $arr['output']=$output;
+
 
         Setting::set ('pid', $arr['pid']);
         $arr['status'] = 'success';
