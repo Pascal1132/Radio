@@ -1,0 +1,4 @@
+{
+    "audio_url_mount_point": "http://localhost:8000/stream.mp3",
+    "command": "echo 'test #F#'"
+}

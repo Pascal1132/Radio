@@ -1,0 +1,68 @@
+.footer {
+    background-color: lightgray;
+    position: fixed;
+    width: 100vw;
+    left: 0;
+    bottom: 0;
+    padding: 15px;
+}
+body, html, .container, .jumbotron{
+    height: 100%;
+    overflow: hidden;
+}
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    max-width: 700px;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+.vertical-center {
+    min-height: 40vh; /* These two lines are counted as one :-)       */
+
+    display: flex;
+    align-items: center;
+}
+audio::-internal-media-controls-download-button {
+    display:none;
+}
+audio::-webkit-media-controls-enclosure {
+    overflow:hidden;
+}
+audio::-webkit-media-controls-panel {
+    width: calc(100% + 33px);
+}
+.input-hide-toggle{
+    max-width: 200px;
+}
