@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="row w-100 h-90 ">
-        <img src="{{asset('/storage/app/public/images/mountain.jpg')}}" class="col-5 h-100 cover d-none d-md-block">
+        <img src="{{asset('/storage/app/images/mountain.jpg')}}" class="col-5 h-100 cover d-none d-md-block">
         </img>
         <div class="col-md-5 m-4 m-md-1 align-self-center mb-5">
 
