@@ -11,7 +11,7 @@
             <h2>Petite radio</h2>
             <p>Vous pouvez définir les paramètres</p>
 
-            <input type="range" min="80000" max="120000" value="100000" step="100" class="slider" id="slider_frequence">
+            <input type="range" min="80" max="120" value="100" step="0.1" class="slider" id="slider_frequence">
             <p>Fréquence: <span id="frequence"></span><input class="input-hide-toggle" id="frequence_input" type="number" style="display: none"/> Hz</p>
 
             <audio id="player">
