@@ -33,12 +33,12 @@
             $(this).hide();
         });
         $('#volume').html($("#slider_volume").val() );
-        $('#frequence').html($("#slider_frequence").val() );
+
         $("#slider_volume").on('input', function(){
             $('#volume').html($(this).val());
         });
         $("#slider_frequence").on('input', function(){
-            $('#frequence').html($(this).val());
+            $('.frequence').html($(this).val());
 
 
         });
@@ -49,15 +49,18 @@
             // Si trop demandant à enlever
             //sendAjax($("#slider_volume").val(),$("#slider_frequence").val());
         })
-
-
+        $('#src-player').on('error', function(){
+            $('#player-error').delay(400).fadeToggle(600);
+        });
+        $('#src-player').on('pause', function(){
+            $('#player-error').delay(400).fadeToggle(600);
+        });
 
         $("#volume").click(function(e){
             e.preventDefault();
-
         });
         setInputListener("#volume", "#slider_volume");
-        setInputListener("#frequence", "#slider_frequence");
+        setInputListener(".frequence", "#slider_frequence");
 
         function sendAjax(volume, frequence){
             $(".progress").show();
@@ -74,7 +77,7 @@
                 function(data){
                     data = JSON.parse(data);
                     $("#return").html(data);
-                    $("#freq_in_use").text(data.freq_in_use);
+                    $(".freq_in_use").text(data.freq_in_use);
 
                 },
                 'text'

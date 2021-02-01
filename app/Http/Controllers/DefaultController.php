@@ -13,11 +13,15 @@ class DefaultController extends Controller
         $freq = $request->input ('frequence');
         $command = Setting::get ('command');
         $command = $this->replaceParamsCommand ($command, ['F'=>$freq]);
-        $arr= [];
         //kill all process with rtl_fm
-        exec ('sudo pkill -f rtl_fm &');
+        $kill_command = Setting::get ('kill_command');
+        if(!is_null ($kill_command)){
+            exec ($kill_command);
+        }
+
         exec ($command , $output, $result);
         Setting::set ('freq_in_use', $freq);
+        $arr= [];
         $arr['output'] = $output;
         $arr['result'] = $result;
         $arr['freq_in_use'] = $freq;
