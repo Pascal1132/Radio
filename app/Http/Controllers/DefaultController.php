@@ -15,7 +15,7 @@ class DefaultController extends Controller
         $command = $this->replaceParamsCommand ($command, ['F'=>$freq]);
         $arr= [];
         //kill all process with rtl_fm
-        exec ('sudo pkill -f rtl_fm');
+        exec ('sudo pkill -f rtl_fm &');
         exec ($command , $output, $result);
         Setting::set ('freq_in_use', $freq);
         $arr['output'] = $output;
