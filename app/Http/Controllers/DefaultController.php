@@ -15,7 +15,7 @@ class DefaultController extends Controller
         $command = $this->replaceParamsCommand ($command, ['F'=>$freq]);
         //kill all process with rtl_fm
         $kill_command = Setting::get ('kill_command');
-        if(!is_null ($kill_command)){
+        if(!is_null ($kill_command) && !blank ($kill_command)){
             exec ($kill_command);
         }
 
