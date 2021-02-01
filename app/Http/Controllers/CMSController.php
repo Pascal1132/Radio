@@ -20,21 +20,34 @@ class CMSController extends Controller
         $password_hashed = Hash::make($password);
 
         if(config('app.settings') == null){
-            $settings = [];
-            $settings['credentials'] = [
+
+            Setting::set ('credentials', [
                 'name' => $user,
                 'password' => $password_hashed
-            ];
-            $text = json_encode ($settings, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-            file_put_contents (config_path ('config.json'), $text);
+            ]);
+            session(['user'=>$user]);
+            return redirect('/cms/home');
         }else if (isset(config('app.settings')['credentials'])){
             if(Hash::check($password, config('app.settings')['credentials']['password'])){
                 session(['user'=>$user]);
-                return \redirect (route('cms.home'));
+                return redirect('/cms/home');
             }else{
                 return Redirect::back()->withErrors(['Connexion refusée']);
             }
+        }else{
+            Setting::set ('credentials', [
+                'name' => $user,
+                'password' => $password_hashed
+            ]);
+            session(['user'=>$user]);
+            return redirect('/cms/home');
+
         }
+    }
+
+    public function logout(Request $request){
+        $request->session()->forget('user');
+        return redirect('/cms/');
     }
     public function command(){
         $command = Setting::get ('command');

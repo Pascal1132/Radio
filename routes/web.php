@@ -34,5 +34,6 @@ Route::middleware([\App\Http\Middleware\RedirectIfAuthenticated::class])->group(
     })->name ('cms.login');
 });
 Route::post('/cms/login', 'CMSController@login')->name ('cms.login');
+Route::get('/cms/logout', 'CMSController@logout')->name ('cms.logout');
 
 Route::post('/execute/command', 'DefaultController@executeCommand');

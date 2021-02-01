@@ -66,3 +66,14 @@ audio::-webkit-media-controls-panel {
 .input-hide-toggle{
     max-width: 200px;
 }
+.pb-fill{
+    animation: fill 2s linear 1;
+}
+@keyframes fill {
+    100% {
+        width: 100%;
+    }
+    0% {
+        width: 0%;
+    }
+}

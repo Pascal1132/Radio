@@ -9,9 +9,11 @@
 </head>
 
 <body>
+
 <header>
     @include('includes.default.header')
 </header>
+
     <div class="container-fluid">
 
 
@@ -21,6 +23,15 @@
     </div>
 <script>
     $( document ).ready(function() {
+
+        $('#play').on('click',function(){
+            $('#pause').show();
+            $(this).hide();
+        });
+        $('#pause').on('click',function(){
+            $('#play').show();
+            $(this).hide();
+        });
         $('#volume').html($("#slider_volume").val() );
         $('#frequence').html($("#slider_frequence").val() );
         $("#slider_volume").on('input', function(){
@@ -36,7 +47,7 @@
         });
         $(".slider").on('input', function(){
             // Si trop demandant à enlever
-            sendAjax($("#slider_volume").val(),$("#slider_frequence").val());
+            //sendAjax($("#slider_volume").val(),$("#slider_frequence").val());
         })
 
 
@@ -49,6 +60,10 @@
         setInputListener("#frequence", "#slider_frequence");
 
         function sendAjax(volume, frequence){
+            $(".progress").show();
+            $("#slider_frequence").prop( "disabled", true );
+            $(".progress-bar").addClass('pb-fill');
+            setTimeout(function(){ $(".progress-bar").removeClass('pb-fill');  $("#slider_frequence").prop( "disabled", false );}, 2000);
             $.post(
                 'execute/command',
                 {
@@ -57,10 +72,14 @@
                     frequence : frequence
                 },
                 function(data){
+                    data = JSON.parse(data);
                     $("#return").html(data);
+                    $("#freq_in_use").text(data.freq_in_use);
+
                 },
                 'text'
             );
+
 
         }
         // #name and #name_input

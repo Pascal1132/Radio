@@ -14,16 +14,14 @@ class DefaultController extends Controller
         $command = Setting::get ('command');
         $command = $this->replaceParamsCommand ($command, ['F'=>$freq]);
         $arr= [];
-        $arr['command'] = $command;
-        exec ('kill ' . Setting::get ('pid'));
-        $arr['output']=shell_exec ($command . " 2>&1; echo $?");
-        $arr['pid'] = $process->getPid ();
-        $output = $process->getOutput();
-
-
-        Setting::set ('pid', $arr['pid']);
-        $arr['status'] = 'success';
-        echo var_dump ($arr);
+        //kill all process with rtl_fm
+        exec ('sudo pkill -f rtl_fm');
+        exec ($command , $output, $result);
+        Setting::set ('freq_in_use', $freq);
+        $arr['output'] = $output;
+        $arr['result'] = $result;
+        $arr['freq_in_use'] = $freq;
+        echo json_encode ($arr);
     }
     private function replaceParamsCommand($raw, array $params) {
         $command = $raw;
