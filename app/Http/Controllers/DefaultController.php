@@ -13,6 +13,7 @@ class DefaultController extends Controller
         $freq = $request->input ('frequence');
         $command = Setting::get ('command');
         $kill_command = Setting::get ('kill_command');
+        $output = '';
 
         $command = $this->replaceParamsCommand ($command, ['F'=>$freq]);
         if(!is_null ($kill_command) && !blank ($kill_command)){
