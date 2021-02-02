@@ -13,21 +13,22 @@ use Whoops\Exception\ErrorException;
 class Setting
 {
     public static function get($param){
-        if(config('app.settings') == null){
+        if(json_decode(file_get_contents(config_path('config.json')), true) == null){
             return null;
-        }else if (isset(config('app.settings')[$param])){
-            return config('app.settings')[$param];
+        }else if (isset(json_decode(file_get_contents(config_path('config.json')), true)[$param])){
+            return json_decode(file_get_contents(config_path('config.json')), true)[$param];
         }else {
             return null;
         }
     }
     public static function set($param, $value){
-        if(config('app.settings') == null){
+        if(json_decode(file_get_contents(config_path('config.json')), true) == null){
             $settings = [];
             $settings[$param] = $value;
 
         }else {
-            $settings = config('app.settings');
+
+            $settings = json_decode(file_get_contents(config_path('config.json')), true);
             $settings[$param] = $value;
         }
         config(['app.settings' => $settings]);
