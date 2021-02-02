@@ -21,7 +21,7 @@ class DefaultController extends Controller
         }
         $arr['output_kill'] = $output;
         if(!is_null ($command) && !blank ($command)){
-            $output = shell_exec ($command);
+            $output = var_dump(shell_exec ($command));
         }
 
 
