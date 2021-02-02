@@ -32,8 +32,10 @@ class Setting
         }
         config(['app.settings' => $settings]);
         try {
-            $text = json_encode ($settings, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-            file_put_contents (config_path ('config.json'), $text);
+            while(Setting::get ($param) !== $value){
+                $text = json_encode ($settings, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                file_put_contents (config_path ('config.json'), $text);
+            }
         }catch(Exception $e){
             throw new ErrorException($e->getMessage (), 0);
         }
