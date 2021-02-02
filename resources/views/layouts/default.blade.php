@@ -59,7 +59,7 @@
             var myInterval = setInterval(function(){
                 document.getElementById("player").load();
                 if($('#player-success').error == null) clearInterval(myInterval);
-            },4000);
+            },1500);
 
         });
         $('#player').on('canplay', function(){
@@ -70,6 +70,18 @@
                 $('#player-success').delay(400).fadeIn(600);
             }
 
+        });
+        $('.btn-kill-process').on('click', function(){
+            $.post(
+                'execute/command-kill',
+                {
+                    "_token": "{{csrf_token ()}}",
+                },
+                function(data){
+
+                },
+                'text'
+            );
         });
         $('#player').on('ended', function(){
             document.getElementById("player").load();

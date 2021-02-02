@@ -36,6 +36,17 @@ class DefaultController extends Controller
         $arr['freq_in_use'] = $freq;
         echo json_encode ($arr);
     }
+    public function executeCommandKill(Request $request){
+        $output = '';
+        if(!is_null (Setting::get ('kill_command')) && !blank (Setting::get ('kill_command'))){
+            $return = exec (Setting::get ('kill_command'), $output);
+            if ($return != 0)
+            {
+                $output = 'Erreur dans la commande de suppression de processus';
+            }
+        }
+        return $output;
+    }
     private function replaceParamsCommand($raw, array $params) {
         $command = $raw;
         preg_match_all("/\\#(.*?)\\#/", $raw, $match_arr);

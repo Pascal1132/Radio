@@ -12,7 +12,7 @@
             <h1><span class="freq_in_use frequence" >{{\App\Setting::get('freq_in_use') ?? '0'}}</span><input class="input-hide-toggle frequence_input" type="number" style="display: none"/> hz</h1>
 
 
-            <input type="range" min="80" max="120" value="{{\App\Setting::get('freq_in_use')}}" step="0.1" class="slider" id="slider_frequence">
+            <input type="range" min="80" max="120" value="{{\App\Setting::get('freq_in_use')}}" step="0.1" class="slider" id="slider_frequence"> <button title='Forcestop process' class="btn btn-sm btn-danger rounded-pill mb-2 btn-kill-process"> <i class="fas fa-times-circle"></i></button>
 
             <br><br>
             <div >
