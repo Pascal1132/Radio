@@ -12,14 +12,18 @@ class DefaultController extends Controller
     public function executeCommand(Request $request){
         $freq = $request->input ('frequence');
         $command = Setting::get ('command');
-        $command = $this->replaceParamsCommand ($command, ['F'=>$freq]);
-        //kill all process with rtl_fm
         $kill_command = Setting::get ('kill_command');
+
+        $command = $this->replaceParamsCommand ($command, ['F'=>$freq]);
         if(!is_null ($kill_command) && !blank ($kill_command)){
-            exec ($kill_command);
+            exec ($kill_command, $output);
+        }
+        $arr['output_kill'] = $output;
+        if(!is_null ($command) && !blank ($command)){
+            exec ($command , $output, $result);
         }
 
-        exec ($command , $output, $result);
+
         Setting::set ('freq_in_use', $freq);
         $arr= [];
         $arr['output'] = $output;

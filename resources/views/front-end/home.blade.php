@@ -22,6 +22,10 @@
             </audio>
             <div class="text-danger" id="player-error" style="display: none">Erreur dans le chargement de l'audio: Aucune source détectée <i class="fas fa-exclamation-triangle text-danger mb-5"></i></div>
             </div>
+        <div class="text-success" id="player-success" style="display: none">Connecté <i class="fas fa-link"></i>
+
+        </div>
+        </div>
 
         <br>
         <code id="return" class="mt-2"></code>

@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if (file_exists(config_path('config.json'))){
             $settings = json_decode(file_get_contents(config_path('config.json')), true);
-            
+
             config(['app.settings' => $settings]);
         }
     }

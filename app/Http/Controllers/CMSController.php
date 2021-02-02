@@ -58,10 +58,12 @@ class CMSController extends Controller
     public function commandPost(Request $request){
         $command = $request->input('command');
         $kill_command = $request->input('kill_command');
-        if($command == null) $command = '';
-        if($kill_command == null) $kill_command = '';
-        Setting::set ('command', $command);
-        Setting::set ('kill_command', $kill_command);
+        if($command !== null){
+            Setting::set ('command', $command);
+        }
+        if($kill_command !== null){
+            Setting::set ('kill_command', $kill_command);
+        }
         return back()->with(['succes'=>'Enregistrement effectué']);
     }
     public function mountPointIcecast(Request $request){

@@ -4,9 +4,11 @@
 namespace App;
 
 
+use http\Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use phpDocumentor\Reflection\Types\Boolean;
+use Whoops\Exception\ErrorException;
 
 class Setting
 {
@@ -28,7 +30,13 @@ class Setting
             $settings = config('app.settings');
             $settings[$param] = $value;
         }
-        $text = json_encode ($settings, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        file_put_contents (config_path ('config.json'), $text);
+        config(['app.settings' => $settings]);
+        try {
+            $text = json_encode ($settings, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            file_put_contents (config_path ('config.json'), $text);
+        }catch(Exception $e){
+            throw new ErrorException($e->getMessage (), 0);
+        }
+
     }
 }
