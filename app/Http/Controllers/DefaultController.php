@@ -11,6 +11,7 @@ class DefaultController extends Controller
 {
     public function executeCommand(Request $request){
         $freq = $request->input ('frequence');
+        Setting::set ('freq_in_use', $freq);
         $command = Setting::get ('command');
         $kill_command = Setting::get ('kill_command');
         $output = '';
@@ -30,7 +31,7 @@ class DefaultController extends Controller
             }
         }
         $arr['output'] = $output;
-        Setting::set ('freq_in_use', $freq);
+
         $arr= [];
         $arr['freq_in_use'] = $freq;
         echo json_encode ($arr);
