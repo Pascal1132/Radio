@@ -17,17 +17,21 @@ class DefaultController extends Controller
 
         $command = $this->replaceParamsCommand ($command, ['F'=>$freq]);
         if(!is_null ($kill_command) && !blank ($kill_command)){
-            exec ($kill_command, $output);
+            $return = exec ($kill_command, $output);
+            if ($return != 0)
+            {
+                $output = 'Erreur dans la commande de suppression de processus';
+            }else{
+                if(!is_null ($command) && !blank ($command)){
+                    $output = var_dump(shell_exec ($command));
+                }else{
+                    $output = 'La commande est vide';
+                }
+            }
         }
-        $arr['output_kill'] = $output;
-        if(!is_null ($command) && !blank ($command)){
-            $output = var_dump(shell_exec ($command));
-        }
-
-
+        $arr['output'] = $output;
         Setting::set ('freq_in_use', $freq);
         $arr= [];
-        $arr['output'] = $output;
         $arr['freq_in_use'] = $freq;
         echo json_encode ($arr);
     }
