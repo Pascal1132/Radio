@@ -21,14 +21,13 @@ class DefaultController extends Controller
         }
         $arr['output_kill'] = $output;
         if(!is_null ($command) && !blank ($command)){
-            exec ($command , $output, $result);
+            $output = shell_exec ($command);
         }
 
 
         Setting::set ('freq_in_use', $freq);
         $arr= [];
         $arr['output'] = $output;
-        $arr['result'] = $result;
         $arr['freq_in_use'] = $freq;
         echo json_encode ($arr);
     }
