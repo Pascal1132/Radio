@@ -9,3 +9,10 @@ Enlever le spasme du bouton play
 Ajouter le range possible dans cms
 Ajouter les noms des chaines
 Chaines favorites (avec cookies)
+
+
+
+#### Code HTML pour slider bar radio
+#outer HTML
+<video autoplay="" controls="" style="height: 40px; width: 66%;"></video>
+
