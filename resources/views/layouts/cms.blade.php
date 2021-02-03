@@ -32,6 +32,12 @@
                                 <span class="d-none d-md-inline"> Commande </span>
                             </a>
                         </li>
+                        <li class="nav-item ">
+                            <a class="nav-link @yield('channel_menu')" href="{{route('cms.channels')}}"
+                               title="Propriété de la commande"><span class="iconify" data-icon="entypo:radio" data-inline="false"></span>
+                                <span class="d-none d-md-inline"> Chaînes </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

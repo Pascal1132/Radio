@@ -55,15 +55,16 @@ class CMSController extends Controller
 
         return view('cms.command', ['command'=>$command]);
     }
+    public function channels(){
+        $channels = Setting::get ('channels');
+        return view('cms.channels', ['channels'=>$channels]);
+    }
     public function commandPost(Request $request){
         $command = $request->input('command');
         $kill_command = $request->input('kill_command');
-        if($command !== null){
-            Setting::set ('command', $command);
-        }
-        if($kill_command !== null){
-            Setting::set ('kill_command', $kill_command);
-        }
+        Setting::set ('command', $command);
+        Setting::set ('kill_command', $kill_command);
+
         return back()->with(['succes'=>'Enregistrement effectué']);
     }
     public function mountPointIcecast(Request $request){

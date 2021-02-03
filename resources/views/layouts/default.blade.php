@@ -23,7 +23,7 @@
     </div>
 <script>
     $( document ).ready(function() {
-
+        var connected = false;
         $('#play').on('click',function(){
             $('#pause').show();
             $(this).hide();
@@ -45,10 +45,6 @@
         $(".slider").on('change', function(){
             sendAjax($("#slider_volume").val(),$("#slider_frequence").val());
         });
-        $(".slider").on('input', function(){
-            // Si trop demandant à enlever
-            //sendAjax($("#slider_volume").val(),$("#slider_frequence").val());
-        })
         $('#src-player').on('error', function(){
             if($('#player-error:visible').length == 0){
                 $('#player-error').delay(400).fadeIn(600);
@@ -56,13 +52,16 @@
             if($('#player-success:visible').length == 1){
                 $('#player-success').fadeOut(600);
             }
+            connected = false;
             var myInterval = setInterval(function(){
+                connected = false;
                 document.getElementById("player").load();
                 if($('#player-success').error == null) clearInterval(myInterval);
             },1500);
 
         });
-        $('#player').on('canplay', function(){
+
+        $('#player').on('loadeddata', function(){
             if($('#player-error:visible').length == 1){
                 $('#player-error').fadeOut(600);
             }
@@ -138,6 +137,14 @@
 
                 sendAjax($("#slider_volume").val(),$("#slider_frequence").val());
             });
+        }
+
+        function UrlExists(url)
+        {
+            var http = new XMLHttpRequest();
+            http.open('HEAD', url, false);
+            http.send();
+            return http.status!=404;
         }
     });
 

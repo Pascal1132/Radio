@@ -1,1 +1,11 @@
-Add possibility to change command for killing in cms
+Add possibility to change command for killing in cms 	done
+Bloquer avec un mot de passe la chaine de radio	
+Addresse ip qui peuvent changer la radio	
+Augmenter la taille du lecteur
+Changer Hz vers MgHz (à voir)
+Changer le nom dans le cms
+Ajouter le nombre de client
+Enlever le spasme du bouton play
+Ajouter le range possible dans cms
+Ajouter les noms des chaines
+Chaines favorites (avec cookies)

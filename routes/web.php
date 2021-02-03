@@ -25,6 +25,7 @@ Route::get('/cms/home', function () {
     return view('cms.home');
 })->name ('cms.home');
     Route::get('/cms/command', 'CMSController@command')->name ('cms.command');
+    Route::get('/cms/channels', 'CMSController@channels')->name ('cms.channels');
     Route::post('/cms/command', 'CMSController@commandPost')->name ('cms.command');
     Route::post('/cms/mount_point_icecast', 'CMSController@mountPointIcecast')->name ('cms.mount_point_icecast');
 });
