@@ -70,6 +70,25 @@
             }
 
         });
+        $('#player').on('play', function(){
+            $('.player-custom-control.play').hide();
+            $('.player-custom-control.pause').show();
+        });
+        $('#player').on('pause', function(){
+            $('.player-custom-control.play').show();
+            $('.player-custom-control.pause').hide();
+        });
+        $('.player-custom-control.play').on('click', function(){
+            document.getElementById('player').play();
+        });
+        $('.player-custom-control.pause').on('click', function(){
+            document.getElementById('player').pause();
+        });
+        $('#player').on('progress', function(){
+            time= Math.floor(document.getElementById('player').currentTime);
+            date = new Date(time * 1000).toISOString().substr(11, 8);
+            $('.audio-progress-time').text(date);
+        });
         $('.btn-kill-process').on('click', function(){
             $.post(
                 'execute/command-kill',

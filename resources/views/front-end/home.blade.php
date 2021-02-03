@@ -16,10 +16,13 @@
 
             <br><br>
             <div >
-            <audio id="player" controls autoplay="true">
+            <audio id="player" autoplay="true">
                 <source id="src-player" src="{{\App\Setting::get ('audio_url_mount_point')}}" >
                 Your browser does not support the audio element.
             </audio>
+                <div id="custom-player">
+                    <div><i class="fas fa-play player-custom-control play"></i><i class="fas fa-pause player-custom-control pause" style="display: none"></i><span class="audio-progress-time">00:00:00</span><i class="fas fa-undo player-custom-control"></i><i class="fas fa-redo player-custom-control"></i></div>
+                </div>
             <div class="text-danger" id="player-error" style="display: none">Erreur dans le chargement de l'audio: Aucune source détectée <i class="fas fa-exclamation-triangle text-danger mb-5"></i></div>
             </div>
         <div class="text-success" id="player-success" style="display: none">Connecté <i class="fas fa-link"></i>

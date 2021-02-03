@@ -77,3 +77,29 @@ audio::-webkit-media-controls-panel {
         width: 0%;
     }
 }
+.player-custom-control{
+    margin: 5px;
+    padding: 6px;
+    padding-top: 8px;
+    border: 2px solid black;
+    border-radius: 50%;
+    background: white;
+    width: 35px;
+    height: 35px;
+    color: black;
+}
+#custom-player {
+    width: 300px;
+    margin: auto;
+    border-radius: 5px;
+    background: cornflowerblue;
+    border: 2px solid black;
+    font-family: "Gill Sans MT";
+    font-size: 20px;
+    color: white;
+}
+.player-custom-control:hover{
+    color: royalblue;
+    cursor: pointer;
+}
+
