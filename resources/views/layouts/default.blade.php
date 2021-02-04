@@ -43,7 +43,8 @@
 
         });
         $(".slider").on('change', function(){
-            sendAjaxCommand($("#slider_frequence").val());
+            sendAjaxKillCommand();
+            setTimeout(() => {  sendAjaxCommand($("#slider_frequence").val()); }, 500);
         });
         $('#src-player').on('error', function(){
             if($('#player-error:visible').length == 0){
@@ -154,8 +155,9 @@
                 $(this).fadeOut(100, function(){
                     $(name).fadeIn(100);
                 });
+                sendAjaxKillCommand();
+                setTimeout(() => {  sendAjaxCommand($("#slider_frequence").val()); }, 500);
 
-                sendAjaxCommand($("#slider_frequence").val());
 
 
             });
