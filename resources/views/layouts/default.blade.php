@@ -43,9 +43,7 @@
 
         });
         $(".slider").on('change', function(){
-            sendAjaxKillCommand(function(){
-                sendAjaxCommand($("#slider_frequence").val());
-            });
+            sendAjaxCommand($("#slider_frequence").val());
         });
         $('#src-player').on('error', function(){
             if($('#player-error:visible').length == 0){
@@ -157,9 +155,8 @@
                     $(name).fadeIn(100);
                 });
 
-                sendAjaxKillCommand(function(){
-                    sendAjaxCommand($("#slider_frequence").val());
-                });
+                sendAjaxCommand($("#slider_frequence").val());
+
 
             });
         }
