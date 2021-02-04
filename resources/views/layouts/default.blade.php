@@ -8,18 +8,14 @@
 
 </head>
 
-<body>
+<body antialiased>
 
 <header>
     @include('includes.default.header')
 </header>
 
     <div class="container-fluid">
-
-
             @yield('content')
-
-
     </div>
 <script>
     $( document ).ready(function() {
