@@ -106,7 +106,7 @@
 
         function sendAjaxKillCommand(callback = function(){}){
             $.post(
-                '{{(str_ends_with(\App\Setting::get ('url_server'), '/') || empty(\App\Setting::get ('url_server'))) ? \App\Setting::get ('url_server') : \App\Setting::get ('url_server') . '/'}}execute/command-kill',
+                '{{(str_ends_with((\App\Setting::get ('url_server') ?? ''), '/') || empty((\App\Setting::get ('url_server') ?? ''))) ? \App\Setting::get ('url_server') : \App\Setting::get ('url_server') . '/'}}execute/command-kill',
                 {
                     "_token": "{{csrf_token ()}}",
                 },
@@ -121,7 +121,7 @@
             $(".progress-bar").addClass('pb-fill');
             setTimeout(function(){ $(".progress-bar").removeClass('pb-fill');  $("#slider_frequence").prop( "disabled", false );}, 2000);
             $.post(
-                '{{(str_ends_with(\App\Setting::get ('url_server'), '/') || empty(\App\Setting::get ('url_server'))) ? \App\Setting::get ('url_server') : \App\Setting::get ('url_server') . '/'}}execute/command',
+                '{{(str_ends_with((\App\Setting::get ('url_server') ?? ''), '/') || empty((\App\Setting::get ('url_server') ?? ''))) ? \App\Setting::get ('url_server') : \App\Setting::get ('url_server') . '/'}}execute/command',
                 {
                     "_token": "{{csrf_token ()}}",
                     frequence : frequence
