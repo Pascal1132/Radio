@@ -12,7 +12,7 @@
             <h1><span class="freq_in_use frequence" >{{\App\Setting::get('freq_in_use') ?? '0'}}</span><input class="input-hide-toggle frequence_input" type="number" style="display: none"/> MHz</h1>
 
 
-            <input type="range" min="80" max="120" value="{{\App\Setting::get('freq_in_use')}}" step="0.1" class="slider" id="slider_frequence">
+            <input type="range" min="{{\App\Setting::get ('freq_min') ?? 80}}" max="{{\App\Setting::get ('freq_min') ?? 120}}" value="{{\App\Setting::get('freq_in_use')}}" step="0.1" class="slider" id="slider_frequence">
 
             <br><br>
             <div >
@@ -21,7 +21,7 @@
                 Your browser does not support the audio element.
             </audio>
                 <div id="custom-player">
-                    <div> <i class="fas fa-times-circle btn-kill-process player-custom-control" title='Forcestop process'></i><i class="fas fa-play player-custom-control play"></i><i class="fas fa-pause player-custom-control pause" style="display: none"></i><span class="audio-progress-time">00:00:00</span><i class="fas fa-undo player-custom-control"></i><i class="fas fa-redo player-custom-control"></i></div>
+                    <div> <i class="fas fa-times-circle btn-kill-process player-custom-control" title='Forcestop process'></i><i class="fas fa-play player-custom-control play" title="Play"></i><i title='Pause' class="fas fa-pause player-custom-control pause" style="display: none"></i><span class="audio-progress-time">00:00:00</span><i class="fas fa-undo player-custom-control"></i><i class="fas fa-redo player-custom-control"></i></div>
                 </div>
             <div class="text-danger" id="player-error" style="display: none">Erreur dans le chargement de l'audio: Aucune source détectée <i class="fas fa-exclamation-triangle text-danger mb-5"></i></div>
             </div>

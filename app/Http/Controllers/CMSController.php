@@ -49,10 +49,18 @@ class CMSController extends Controller
         $request->session()->forget('user');
         return redirect('/cms/');
     }
+    public function range(){
+        return view ('cms.range');
+    }
+    public function rangePost(Request $request){
+        $min = $request->input('freq_min');
+        $max = $request->input('freq_max');
+        Setting::set ('freq_min', $min);
+        Setting::set ('freq_max', $max);
+        return back()->with(['succes'=>'Enregistrement effectué']);
+    }
     public function command(){
         $command = Setting::get ('command');
-
-
         return view('cms.command', ['command'=>$command]);
     }
     public function channels(){
@@ -68,8 +76,9 @@ class CMSController extends Controller
         return back()->with(['succes'=>'Enregistrement effectué']);
     }
     public function mountPointIcecast(Request $request){
+        $url_server = $request->input('url_server');
         $mount_point = $request->input('mount_point');
-        if($request->input('mount_point') == null) $mount_point = '';
+        Setting::set ('url_server', $url_server);
         Setting::set ('audio_url_mount_point', $mount_point);
         return back()->with(['succes'=>'Enregistrement effectué']);
     }

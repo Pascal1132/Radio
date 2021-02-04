@@ -34,8 +34,14 @@
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link @yield('channel_menu')" href="{{route('cms.channels')}}"
-                               title="Propriété de la commande"><span class="iconify" data-icon="entypo:radio" data-inline="false"></span>
+                               title="Liste des chaines"><span class="iconify" data-icon="entypo:radio" data-inline="false"></span>
                                 <span class="d-none d-md-inline"> Chaînes </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link @yield('range_menu')" href="{{route('cms.range')}}"
+                               title="Range des fréquences possibles"><i class="fas fa-exchange-alt"></i>
+                                <span class="d-none d-md-inline"> Range </span>
                             </a>
                         </li>
                     </ul>

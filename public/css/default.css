@@ -98,8 +98,25 @@ audio::-webkit-media-controls-panel {
     font-size: 20px;
     color: white;
 }
+::selection {
+    color: none;
+    background: none;
+}
+/* For Mozilla Firefox */
+::-moz-selection {
+    color: none;
+    background: none;
+}
 .player-custom-control:hover{
     color: royalblue;
     cursor: pointer;
+}
+#player-error, #player-success{
+    border: 2px solid black;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 250px;
+    margin: auto;
+    margin-top: -2px;
 }
 

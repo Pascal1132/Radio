@@ -43,14 +43,16 @@
 
         });
         $(".slider").on('change', function(){
-            sendAjax($("#slider_volume").val(),$("#slider_frequence").val());
+            sendAjaxKillCommand(function(){
+                sendAjaxCommand($("#slider_frequence").val());
+            });
         });
         $('#src-player').on('error', function(){
             if($('#player-error:visible').length == 0){
-                $('#player-error').delay(400).fadeIn(600);
+                $('#player-error').delay(400).slideDown(600);
             }
             if($('#player-success:visible').length == 1){
-                $('#player-success').fadeOut(600);
+                $('#player-success').slideUp(600);
             }
             connected = false;
             var myInterval = setInterval(function(){
@@ -63,10 +65,10 @@
 
         $('#player').on('loadeddata', function(){
             if($('#player-error:visible').length == 1){
-                $('#player-error').fadeOut(600);
+                $('#player-error').slideUp(600);
             }
             if($('#player-success:visible').length == 0){
-                $('#player-success').delay(400).fadeIn(600);
+                $('#player-success').delay(400).slideDown(600);
             }
 
         });
@@ -90,16 +92,7 @@
             $('.audio-progress-time').text(date);
         });
         $('.btn-kill-process').on('click', function(){
-            $.post(
-                'execute/command-kill',
-                {
-                    "_token": "{{csrf_token ()}}",
-                },
-                function(data){
-
-                },
-                'text'
-            );
+            sendAjaxKillCommand();
         });
         $('#player').on('ended', function(){
             document.getElementById("player").load();
@@ -111,16 +104,26 @@
         setInputListener("#volume", "#slider_volume");
         setInputListener(".frequence", "#slider_frequence");
 
-        function sendAjax(volume, frequence){
+        function sendAjaxKillCommand(callback = function(){}){
+            $.post(
+                '{{(str_ends_with(\App\Setting::get ('url_server'), '/') || empty(\App\Setting::get ('url_server'))) ? \App\Setting::get ('url_server') : \App\Setting::get ('url_server') . '/'}}execute/command-kill',
+                {
+                    "_token": "{{csrf_token ()}}",
+                },
+                callback,
+                'text'
+            );
+        }
+
+        function sendAjaxCommand(frequence){
             $(".progress").show();
             $("#slider_frequence").prop( "disabled", true );
             $(".progress-bar").addClass('pb-fill');
             setTimeout(function(){ $(".progress-bar").removeClass('pb-fill');  $("#slider_frequence").prop( "disabled", false );}, 2000);
             $.post(
-                'execute/command',
+                '{{(str_ends_with(\App\Setting::get ('url_server'), '/') || empty(\App\Setting::get ('url_server'))) ? \App\Setting::get ('url_server') : \App\Setting::get ('url_server') . '/'}}execute/command',
                 {
                     "_token": "{{csrf_token ()}}",
-                    volume : volume,
                     frequence : frequence
                 },
                 function(data){
@@ -154,7 +157,10 @@
                     $(name).fadeIn(100);
                 });
 
-                sendAjax($("#slider_volume").val(),$("#slider_frequence").val());
+                sendAjaxKillCommand(function(){
+                    sendAjaxCommand($("#slider_frequence").val());
+                });
+
             });
         }
 
