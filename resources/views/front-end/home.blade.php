@@ -20,8 +20,9 @@
                 <source id="src-player" src="{{\App\Setting::get ('audio_url_mount_point')}}" >
                 Your browser does not support the audio element.
             </audio>
+
                 <div id="custom-player">
-                    <div> <i class="fas fa-times-circle btn-kill-process player-custom-control" title='Forcestop process'></i><i class="fas fa-play player-custom-control play" title="Play"></i><i title='Pause' class="fas fa-pause player-custom-control pause" style="display: none"></i><span class="audio-progress-time">00:00:00</span><i class="fas fa-undo player-custom-control"></i><i class="fas fa-redo player-custom-control"></i></div>
+                    <div> <i class="fas fa-times-circle btn-kill-process player-custom-control" title='Forcestop process'></i><i class="fas fa-play player-custom-control play" title="Play"></i><i title='Pause' class="fas fa-pause player-custom-control pause" style="display: none"></i><span class="audio-progress-time">00:00:00</span><i class="fas fa-undo player-custom-control"></i><i class="fas fa-redo player-custom-control"></i><i class="fas fa-sliders-h player-custom-control" type="button" data-toggle="modal" data-target="#modalOptions"></i></div>
                 </div>
             <div class="text-danger" id="player-error" style="display: none">Erreur dans le chargement de l'audio: Aucune source détectée <i class="fas fa-exclamation-triangle text-danger mb-5"></i></div>
             </div>
@@ -29,10 +30,29 @@
 
         </div>
         </div>
-
         <br>
         <code id="return" class="mt-2"></code>
 
 
+
+    </div>
+    <!-- Modal -->
+    <div class="modal" id="modalOptions" tabindex="-1" role="dialog" aria-labelledby="modalOptionsTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="">
+                <div class="modal-body">
+                    <form action="">
+                        <label for="">Squelch :</label>
+                        <input class="form-control" type="number" min="0" placeholder="Squelch" value="{{\App\Setting::get('squelch') ?? '0'}}">
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn-info btn-modal">Enregistrer</button>
+                </div>
+                </form>
+            </div>
+        </div>
     </div>
 @stop

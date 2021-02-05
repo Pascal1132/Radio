@@ -6,10 +6,10 @@
     <div class="m-3">
     <form action="{{route ('cms.command')}}" method="post">
         {{csrf_field ()}}
-        <label for="commande">Commande principale (la variable #F# correspond à la fréquence ):</label><br>
-        <textarea class="form-control ff-courier" placeholder="Commande" name="command" id="commande" >{{$command}}</textarea>
+        <label for="command">Commande principale (la variable #F# correspond à la fréquence ):</label><br>
+        <textarea class="form-control ff-courier" placeholder="Commande" name="command" id="command" >{{$command}}</textarea>
         <br>
-        <label for="commande">Commande de destruction du processus (Effectuée juste avant la commande principale) :</label><br>
+        <label for="kill_command">Commande de destruction du processus (Effectuée juste avant la commande principale) :</label><br>
         <input class="form-control ff-courier" placeholder="Commande de destruction du processus" name="kill_command" id="kill_command" value="{{\App\Setting::get ('kill_command')}}">
         <br>
         <input class="btn btn-primary" type="submit" value="Soumettre">

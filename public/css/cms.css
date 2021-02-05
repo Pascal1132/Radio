@@ -77,7 +77,8 @@ body, html {
 }
 
 .main {
-    overflow: auto;
+    overflow-y: auto;
+    max-height:  calc(100vh - 110px);
 }
 
 .ff-courier {
