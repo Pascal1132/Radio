@@ -42,7 +42,8 @@
             <div class="modal-content">
 
                 <div class="modal-body">
-                    <form action="" id="form-options">
+                    <form method="post" action="{{route ('command_options')}}" id="form-options">
+                        {{csrf_field ()}}
                         <button type="button" class="float-right btn-modal save-options" data-dismiss="modal"><i class="fas fa-save"></i></button>
                         <label for="">Squelch :</label>
                         <input class="form-control squelch-input" type="number" min="0" placeholder="Squelch" name="squelch" value="{{\App\Setting::get('squelch') ?? '0'}}">
@@ -97,10 +98,26 @@
                 },1500);
 
             });
-            $('.save-options').onclick(function(){
+            $('.save-options').on('click', function(event){
 
-                $inputs=$('#form-options:input');
-                console.debug(inputs);
+                event.preventDefault();
+                $.ajax({
+                    url: $('#form-options').attr("action"),
+                    type: $('#form-options').attr("method"),
+                    dataType: "JSON",
+                    data: new FormData(document.getElementById('form-options')),
+                    processData: false,
+                    contentType: false,
+                    success: function (data, status)
+                    {
+
+                    },
+                    error: function (xhr, desc, err)
+                    {
+
+
+                    }
+                });
             });
 
             $('#player').on('loadeddata', function(){

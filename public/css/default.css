@@ -103,7 +103,7 @@ audio::-webkit-media-controls-panel {
     color: black;
 }
 #custom-player {
-    width: 300px;
+    min-width: 300px;
     margin: auto;
     border-radius: 5px;
     background: cornflowerblue;
@@ -111,6 +111,7 @@ audio::-webkit-media-controls-panel {
     font-family: "Gill Sans MT";
     font-size: 20px;
     color: white;
+    display: inline-block;
 }
 ::selection {
     color: none;

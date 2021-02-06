@@ -11,8 +11,10 @@ class DefaultController extends Controller
 {
     public function executeCommand(Request $request){
         $freq = $request->input ('frequence');
+        $squelch = Setting::get ('squelch');
+        $gain = Setting::get ('gain');
         $command = Setting::get ('command');
-        $command = $this->replaceParamsCommand ($command, ['F'=>$freq]);
+        $command = $this->replaceParamsCommand ($command, ['F'=>$freq, 'S'=>$squelch, 'G'=>$gain]);
         $arr= [];
 
         Setting::set ('freq_in_use', $freq);
@@ -37,6 +39,13 @@ class DefaultController extends Controller
             }
         }
         return $output;
+    }
+    public function saveCommandOptions(Request $request){
+        $squelch = $request->input ('squelch') ?? null;
+        $gain = $request->input ('gain') ?? null;
+        if($gain) Setting::set ('gain', $gain);
+        if($squelch) Setting::set ('squelch', $squelch);
+        return back()->with(['succes'=>'Enregistrement effectué']);
     }
     private function replaceParamsCommand($raw, array $params) {
         $command = $raw;

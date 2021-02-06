@@ -41,3 +41,4 @@ Route::get('/cms/logout', 'CMSController@logout')->name ('cms.logout');
 
 Route::post('/execute/command', 'DefaultController@executeCommand');
 Route::post('/execute/command-kill', 'DefaultController@executeCommandKill');
+Route::post('/save/command-options', 'DefaultController@saveCommandOptions')->name ('command_options');
