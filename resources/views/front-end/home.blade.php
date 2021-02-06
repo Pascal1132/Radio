@@ -40,19 +40,181 @@
     <div class="modal" id="modalOptions" tabindex="-1" role="dialog" aria-labelledby="modalOptionsTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <form action="">
+
                 <div class="modal-body">
-                    <form action="">
+                    <form action="" id="form-options">
+                        <button type="button" class="float-right btn-modal save-options" data-dismiss="modal"><i class="fas fa-save"></i></button>
                         <label for="">Squelch :</label>
-                        <input class="form-control" type="number" min="0" placeholder="Squelch" value="{{\App\Setting::get('squelch') ?? '0'}}">
+                        <input class="form-control squelch-input" type="number" min="0" placeholder="Squelch" name="squelch" value="{{\App\Setting::get('squelch') ?? '0'}}">
+                        <br>
+                        <label for="">Gain :</label>
+                        <input class="form-control gain-input" type="number" min="0" placeholder="Squelch" name="gain" value="{{\App\Setting::get('gain') ?? '0'}}">
+
                     </form>
                 </div>
-                <div class="modal-footer">
 
-                    <button type="button" class="btn-info btn-modal">Enregistrer</button>
-                </div>
-                </form>
+
             </div>
         </div>
     </div>
+    <script>
+        $( document ).ready(function() {
+            var connected = false;
+            $('#play').on('click',function(){
+                $('#pause').show();
+                $(this).hide();
+            });
+            $('#pause').on('click',function(){
+                $('#play').show();
+                $(this).hide();
+            });
+            $('#volume').html($("#slider_volume").val() );
+
+            $("#slider_volume").on('input', function(){
+                $('#volume').html($(this).val());
+            });
+            $("#slider_frequence").on('input', function(){
+                $('.frequence').html($(this).val());
+
+
+            });
+            $(".slider").on('change', function(){
+                sendAjaxKillCommand();
+                setTimeout(() => {  sendAjaxCommand($("#slider_frequence").val()); }, 500);
+            });
+            $('#src-player').on('error', function(){
+                if($('#player-error:visible').length == 0){
+                    $('#player-error').delay(400).slideDown(600);
+                }
+                if($('#player-success:visible').length == 1){
+                    $('#player-success').slideUp(600);
+                }
+                connected = false;
+                var myInterval = setInterval(function(){
+                    connected = false;
+                    document.getElementById("player").load();
+                    if($('#player-success').error == null) clearInterval(myInterval);
+                },1500);
+
+            });
+            $('.save-options').onclick(function(){
+
+                $inputs=$('#form-options:input');
+                console.debug(inputs);
+            });
+
+            $('#player').on('loadeddata', function(){
+                if($('#player-error:visible').length == 1){
+                    $('#player-error').slideUp(600);
+                }
+                if($('#player-success:visible').length == 0){
+                    $('#player-success').delay(400).slideDown(600);
+                }
+
+            });
+            $('#player').on('play', function(){
+                $('.player-custom-control.play').hide();
+                $('.player-custom-control.pause').show();
+            });
+            $('#player').on('pause', function(){
+                $('.player-custom-control.play').show();
+                $('.player-custom-control.pause').hide();
+            });
+            $('.player-custom-control.play').on('click', function(){
+                document.getElementById('player').play();
+            });
+            $('.player-custom-control.pause').on('click', function(){
+                document.getElementById('player').pause();
+            });
+            $('#player').on('progress', function(){
+                time= Math.floor(document.getElementById('player').currentTime);
+                date = new Date(time * 1000).toISOString().substr(11, 8);
+                $('.audio-progress-time').text(date);
+            });
+            $('.btn-kill-process').on('click', function(){
+                sendAjaxKillCommand();
+            });
+            $('#player').on('ended', function(){
+                document.getElementById("player").load();
+            });
+
+            $("#volume").click(function(e){
+                e.preventDefault();
+            });
+            setInputListener("#volume", "#slider_volume");
+            setInputListener(".frequence", "#slider_frequence");
+
+            function sendOptions(options){
+
+            }
+            function sendAjaxKillCommand(callback = function(){}){
+                $.post(
+                    'execute/command-kill',
+                    {
+                        "_token": "{{csrf_token ()}}",
+                    },
+                    callback,
+                    'text'
+                );
+            }
+
+            function sendAjaxCommand(frequence){
+                $(".progress").show();
+                $("#slider_frequence").prop( "disabled", true );
+                $(".progress-bar").addClass('pb-fill');
+                setTimeout(function(){ $(".progress-bar").removeClass('pb-fill');  $("#slider_frequence").prop( "disabled", false );}, 2000);
+                $.post(
+                    'execute/command',
+                    {
+                        "_token": "{{csrf_token ()}}",
+                        frequence : frequence
+                    },
+                    function(data){
+                        data = JSON.parse(data);
+                        $("#return").html(data);
+                        $(".freq_in_use").text(data.freq_in_use);
+
+                    },
+                    'text'
+                );
+
+
+            }
+            // #name and #name_input
+            function setInputListener(name, slider){
+                $(name).click(function(e){
+                    e.preventDefault();
+                    var txt = $(this).text();
+                    $(name+"_input").val(txt);
+
+                    $(this).fadeOut(100, function () {
+                        $(name+"_input").fadeIn(100);
+                        $(name+"_input").focus();
+                    });
+                });
+                $(name+"_input").focusout(function(e) {
+                    var txt = $(this).val();
+                    $(slider).val(txt);
+                    $(name).text($(slider).val());
+                    $(this).fadeOut(100, function(){
+                        $(name).fadeIn(100);
+                    });
+                    sendAjaxKillCommand();
+                    setTimeout(() => {  sendAjaxCommand($("#slider_frequence").val()); }, 500);
+
+
+
+                });
+            }
+
+            function UrlExists(url)
+            {
+                var http = new XMLHttpRequest();
+                http.open('HEAD', url, false);
+                http.send();
+                return http.status!=404;
+            }
+        });
+
+    </script>
 @stop

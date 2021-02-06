@@ -6,7 +6,7 @@
     <div class="m-3">
     <form action="{{route ('cms.command')}}" method="post">
         {{csrf_field ()}}
-        <label for="command">Commande principale (la variable #F# correspond à la fréquence ):</label><br>
+        <label for="command">Commande principale (#F# => Fréquence, #L# => Squelch ):</label><br>
         <textarea class="form-control ff-courier" placeholder="Commande" name="command" id="command" >{{$command}}</textarea>
         <br>
         <label for="kill_command">Commande de destruction du processus (Effectuée juste avant la commande principale) :</label><br>

@@ -174,3 +174,8 @@ audio::-webkit-media-controls-panel {
     padding: 0px;
     margin:0px;
 }
+.save-options{
+    color: royalblue;
+     background: #101010;
+     border-radius: 2px;
+}
