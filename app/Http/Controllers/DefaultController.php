@@ -13,6 +13,8 @@ class DefaultController extends Controller
         $freq = $request->input ('frequence');
         $squelch = Setting::get ('squelch');
         $gain = Setting::get ('gain');
+        if(!($gain >0 )) $gain = 49.6;
+        if(!($squelch >0)) $squelch = 30;
         $command = Setting::get ('command');
         $command = $this->replaceParamsCommand ($command, ['F'=>$freq, 'S'=>$squelch, 'G'=>$gain]);
         $arr= [];

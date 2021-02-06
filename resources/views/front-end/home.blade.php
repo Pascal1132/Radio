@@ -46,10 +46,10 @@
                         {{csrf_field ()}}
                         <button type="button" class="float-right btn-modal save-options" data-dismiss="modal"><i class="fas fa-save"></i></button>
                         <label for="">Squelch :</label>
-                        <input class="form-control squelch-input" type="number" min="0" placeholder="Squelch" name="squelch" value="{{\App\Setting::get('squelch') ?? '0'}}">
+                        <input class="form-control squelch-input" step="5" type="number" min="0" placeholder="Squelch" name="squelch" value="{{\App\Setting::get('squelch') ?? '0'}}">
                         <br>
                         <label for="">Gain :</label>
-                        <input class="form-control gain-input" type="number" min="0" placeholder="Squelch" name="gain" value="{{\App\Setting::get('gain') ?? '0'}}">
+                        <input class="form-control gain-input" step="5" type="number" min="0" placeholder="Squelch" name="gain" value="{{\App\Setting::get('gain') ?? '0'}}">
 
                     </form>
                 </div>
