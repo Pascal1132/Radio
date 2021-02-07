@@ -12,11 +12,9 @@ class DefaultController extends Controller
     public function executeCommand(Request $request){
         $settings = config('app.settings');
         $freq = $request->input ('frequence');
-        $squelch = $settings['squelch'];
-        $gain = $settings['gain'];
+        $squelch = $settings['squelch'] ?? 30;
+        $gain = $settings['gain'] ?? 49.6;
         $radio_name = ($settings['channels'][$freq]['name'] ?? '');
-        if(!($gain >=0 )) $gain = 49.6;
-        if(!($squelch >=0)) $squelch = 30;
         $command = Setting::get ('command');
         $command = $this->replaceParamsCommand ($command, ['F'=>$freq, 'S'=>$squelch, 'G'=>$gain]);
 
