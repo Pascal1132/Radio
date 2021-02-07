@@ -45,4 +45,5 @@ Route::get('/cms/logout', 'CMSController@logout')->name ('cms.logout');
 Route::post('/execute/command', 'DefaultController@executeCommand');
 Route::post('/execute/command-kill', 'DefaultController@executeCommandKill');
 Route::get('/options', 'DefaultController@getOptions');
+Route::get('/frequency', 'DefaultController@getFrequency');
 Route::post('/save/command-options', 'DefaultController@saveCommandOptions')->name ('command_options');

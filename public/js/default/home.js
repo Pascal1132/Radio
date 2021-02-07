@@ -21,10 +21,16 @@ $( document ).ready(function() {
         var myInterval = setInterval(function(){
             connected = false;
             document.getElementById("player").load();
-            if($('#player-success').error == null) clearInterval(myInterval);
+            if($('#player-success').error == null){
+                getFreq();
+                clearInterval(myInterval);
+            }
         },INTERVAL_TIME_RELOAD);
 
     });
+    setInterval(function(){
+        getFreq();
+    },INTERVAL_TIME_RELOAD);
 
     $('.player-custom-control.options').on('click', function(){
         getOptions();
@@ -48,7 +54,7 @@ $( document ).ready(function() {
         });
     });
 
-    if(AUDIO_SRC == null || AUDIO_SRC == ''){
+    if(AUDIO_SRC == null || AUDIO_SRC === ''){
         showError('Erreur dans la configuration : <em> Aucune source définie</em>');
     }
 
@@ -105,6 +111,28 @@ $( document ).ready(function() {
             $('#player-success').delay(400).slideDown(600);
         }
 
+    }
+    getFreq();
+    function getFreq(){
+        $.get(
+            'frequency',
+            {
+                "_token": CSRF_TOKEN,
+            },
+            function(data){
+                data = JSON.parse(data);
+                if($(".live_freq").text() !== data.freq_in_use){
+                    $(".freq_in_use").text(data.freq_in_use);
+                    $('#slider_frequence').val(data.freq_in_use);
+                    $('.radio-name').text(data.radio_name);
+                    $(".live_freq").text(data.freq_in_use);
+                }
+
+
+
+            },
+            'text'
+        );
     }
     function getOptions(){
         $.get(

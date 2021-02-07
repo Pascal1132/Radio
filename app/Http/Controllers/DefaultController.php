@@ -45,6 +45,12 @@ class DefaultController extends Controller
         Setting::set ('freq_in_use', null);
         return $output;
     }
+    public function getFrequency(Request $request){
+        $arr= [];
+        $arr['freq_in_use'] = Setting::get ('freq_in_use') ?? 0;
+        $arr['radio_name'] = Setting::get ('channels')[$arr['freq_in_use']]['name'] ?? '';
+        return $arr;
+    }
     public function saveCommandOptions(Request $request){
         $squelch = $request->input ('squelch') ?? null;
         $gain = $request->input ('gain') ?? null;
