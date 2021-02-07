@@ -10,9 +10,11 @@ use Symfony\Component\Process\Process;
 class DefaultController extends Controller
 {
     public function executeCommand(Request $request){
+        $settings = config('app.settings');
         $freq = $request->input ('frequence');
-        $squelch = Setting::get ('squelch');
-        $gain = Setting::get ('gain');
+        $squelch = $settings['squelch'];
+        $gain = $settings['gain'];
+        $radio_name = ($settings['channels'][$freq]['name'] ?? '');
         if(!($gain >=0 )) $gain = 49.6;
         if(!($squelch >=0)) $squelch = 30;
         $command = Setting::get ('command');
@@ -29,7 +31,7 @@ class DefaultController extends Controller
         $arr= [];
         $arr['output'] = $output;
         $arr['freq_in_use'] = $freq;
-        $arr['radio_name'] = (Setting::get ('channels')[$freq]['name'] ?? '');
+        $arr['radio_name'] = $radio_name;
 
         return json_encode ($arr);
     }
