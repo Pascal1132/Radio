@@ -30,6 +30,9 @@ Route::get('/cms/home', function () {
     Route::post('/cms/range', 'CMSController@rangePost')->name ('cms.range');
     Route::post('/cms/command', 'CMSController@commandPost')->name ('cms.command');
     Route::post('/cms/mount_point_icecast', 'CMSController@mountPointIcecast')->name ('cms.mount_point_icecast');
+    Route::get('/cms/channels/table', 'CMSController@returnViewTableChannels')->name ('cms.channels.table');
+    Route::post('/cms/channel', 'CMSController@addChannel')->name ('cms.channel.add');
+    Route::delete('/cms/channel', 'CMSController@removeChannel')->name ('cms.channel.remove');
 });
 Route::middleware([\App\Http\Middleware\RedirectIfAuthenticated::class])->group(function () {
     Route::get('/cms', function () {
@@ -41,4 +44,5 @@ Route::get('/cms/logout', 'CMSController@logout')->name ('cms.logout');
 
 Route::post('/execute/command', 'DefaultController@executeCommand');
 Route::post('/execute/command-kill', 'DefaultController@executeCommandKill');
+Route::get('/options', 'DefaultController@getOptions');
 Route::post('/save/command-options', 'DefaultController@saveCommandOptions')->name ('command_options');

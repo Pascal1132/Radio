@@ -70,6 +70,20 @@ body, html {
     margin: 0px;
     padding: 0px;
 }
+.bg--dark{
+    background: var(--colordark);
+    color: white;
+}
+.bg--1{background: var(--color1);}
+.bg--2{background: var(--color2);}
+.bg--3{background: var(--color3);}
+.txt--1{color: var(--color1);}
+.txt--2{color: var(--color2);}
+.txt--3{color: var(--color3);}
+
+#channel-template{
+    display: none;
+}
 
 .page-title {
     margin-top: 15px;

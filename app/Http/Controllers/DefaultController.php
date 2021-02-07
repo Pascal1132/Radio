@@ -13,23 +13,25 @@ class DefaultController extends Controller
         $freq = $request->input ('frequence');
         $squelch = Setting::get ('squelch');
         $gain = Setting::get ('gain');
-        if(!($gain >0 )) $gain = 49.6;
-        if(!($squelch >0)) $squelch = 30;
+        if(!($gain >=0 )) $gain = 49.6;
+        if(!($squelch >=0)) $squelch = 30;
         $command = Setting::get ('command');
         $command = $this->replaceParamsCommand ($command, ['F'=>$freq, 'S'=>$squelch, 'G'=>$gain]);
-        $arr= [];
+
 
         Setting::set ('freq_in_use', $freq);
         if(!is_null ($command) && !blank ($command)){
-            $output = var_dump(shell_exec ($command));
+            $output = shell_exec ($command);
         }else{
             $output = 'La commande est vide';
         }
 
+        $arr= [];
         $arr['output'] = $output;
         $arr['freq_in_use'] = $freq;
+        $arr['radio_name'] = (Setting::get ('channels')[$freq]['name'] ?? '');
 
-        echo json_encode ($arr);
+        return json_encode ($arr);
     }
     public function executeCommandKill(Request $request){
         $output = '';
@@ -48,6 +50,12 @@ class DefaultController extends Controller
         if($gain) Setting::set ('gain', $gain);
         if($squelch) Setting::set ('squelch', $squelch);
         return back()->with(['succes'=>'Enregistrement effectué']);
+    }
+    public function getOptions(Request $request){
+        return json_encode ([
+            'squelch' => Setting::get ('squelch'),
+            'gain' => Setting::get ('gain')
+        ]);
     }
     private function replaceParamsCommand($raw, array $params) {
         $command = $raw;

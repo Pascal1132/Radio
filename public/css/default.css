@@ -6,9 +6,8 @@
     bottom: 0;
     padding: 15px;
 }
-body, html, .container-fluid, .jumbotron{
-    height: 100%;
-    overflow: hidden;
+body, html{
+    height: 80vh;
     padding-right: 0px !important;
 }
 .slidecontainer {

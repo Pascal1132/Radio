@@ -59,6 +59,35 @@ class CMSController extends Controller
         Setting::set ('freq_max', $max);
         return back()->with(['succes'=>'Enregistrement effectué']);
     }
+    public function returnViewTableChannels(Request $request){
+        $channels = Setting::get ('channels') ?? [];
+        $return_string = '';
+        foreach ($channels as $key=>$channel){
+            $return_string.= '<tr>
+                        <td class="frequency">'.$key.'</td>
+                        <td class="name">'.$channel['name'].'</td>
+                        <td><button class="btn btn-sm m-auto btn-remove-channel" data-frequency="'.$channel['frequency'].'" ><i class="fas fa-trash-alt"></i></button></td>
+                    </tr>';
+        }
+        return $return_string;
+    }
+    public function addChannel(Request $request){
+        $channels = Setting::get ('channels') ?? [];
+        $channel = $request->input ('channel');
+        $channels[$channel['frequency']] = $channel;
+        Setting::set ('channels',$channels);
+        return true;
+    }
+    public function removeChannel(Request $request){
+        $channels = Setting::get ('channels') ?? [];
+        $channels_clean = [];
+        foreach ($channels as $freq=>$channel){
+            if($freq !== $request->input ('frequency')){
+                $channels_clean[$freq] = $channel;
+            }
+        }
+        Setting::set ('channels', $channels_clean);
+    }
     public function command(){
         $command = Setting::get ('command');
         return view('cms.command', ['command'=>$command]);
