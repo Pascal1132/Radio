@@ -42,6 +42,7 @@ class DefaultController extends Controller
                 $output = 'Erreur dans la commande de suppression de processus';
             }
         }
+        Setting::set ('freq_in_use', null);
         return $output;
     }
     public function saveCommandOptions(Request $request){
