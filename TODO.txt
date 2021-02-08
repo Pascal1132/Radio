@@ -10,7 +10,7 @@ Ajouter le range possible dans cms
 Ajouter les noms des chaines                            done
 Chaines favorites (avec cookies)
 Rewind et forward
-Ajouter le volume                                       
+Ajouter le volume
 
 
 

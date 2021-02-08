@@ -29,13 +29,12 @@ body, html{
 .btn-show-modal-channel{
     padding: 2px;
     border-radius: 5px;
-    font-size: 25px;
-    border: 2px solid lightslategray;
+    font-size: 30px;
+    height: 55px;
 }
 .btn-show-modal-channel:hover{
     color: #1d3354;
     cursor: pointer;
-    border-color: #1d3354;
 }
 .slider:hover {
     opacity: 1;

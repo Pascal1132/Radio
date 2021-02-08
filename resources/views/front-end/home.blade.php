@@ -10,7 +10,7 @@
         <br>
             <h4 class="text-secondary radio-name" style="min-height: 30px">{{\App\Setting::get ('channels')[\App\Setting::get('freq_in_use')]['name'] ?? ''}}</h4>
 
-            <h1><span class="freq_in_use frequence" >{{\App\Setting::get('freq_in_use') ?? '0'}}</span><input class="input-hide-toggle frequence_input" type="number" style="display: none"/> MHz</h1><i class="far fa-list-alt btn-show-modal-channel" type="button" data-toggle="modal" data-target="#modalChannels"></i>
+            <h1><span class="freq_in_use frequence" >{{\App\Setting::get('freq_in_use') ?? '0'}}</span><input class="input-hide-toggle frequence_input" type="number" style="display: none"/> MHz <i class="far fa-list-alt btn-show-modal-channel btn d-inline-block" type="button" data-toggle="modal" data-target="#modalChannels"></i></h1>
 
             <input type="hidden" class="live_freq">
 
