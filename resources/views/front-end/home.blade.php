@@ -10,7 +10,7 @@
         <br>
             <h4 class="text-secondary radio-name" style="min-height: 30px">{{\App\Setting::get ('channels')[\App\Setting::get('freq_in_use')]['name'] ?? ''}}</h4>
 
-            <h1><span class="freq_in_use frequence" >{{\App\Setting::get('freq_in_use') ?? '0'}}</span><input class="input-hide-toggle frequence_input" type="number" style="display: none"/> MHz</h1>
+            <h1><span class="freq_in_use frequence" >{{\App\Setting::get('freq_in_use') ?? '0'}}</span><input class="input-hide-toggle frequence_input" type="number" style="display: none"/> MHz</h1><i class="far fa-list-alt btn-show-modal-channel" type="button" data-toggle="modal" data-target="#modalChannels"></i>
 
             <input type="hidden" class="live_freq">
 
@@ -18,6 +18,7 @@
 
             <br><br>
             <div >
+                <br>
             <audio id="player" autoplay="true">
                 <source id="src-player" src="{{\App\Setting::get ('audio_url_mount_point')}}" >
                 Your browser does not support the audio element.
@@ -38,11 +39,6 @@
         <div class="text-success" id="player-success" style="display: none"><span id="player-success-text"></span> <i class="fas fa-link"></i>
         </div>
         </div>
-        <br>
-        <code id="return" class="mt-2"></code>
-
-
-
     </div>
     <!-- Modal -->
     <div class="modal" id="modalOptions" tabindex="-1" role="dialog" aria-labelledby="modalOptionsTitle" aria-hidden="true">
@@ -59,6 +55,26 @@
                         <label for="">Gain :</label>
                         <input class="form-control gain-input" type="number" min="0" placeholder="Squelch" name="gain" value="{{\App\Setting::get('gain') ?? '0'}}">
                     </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal" id="modalChannels" tabindex="-1" role="dialog" aria-labelledby="modalChannelsTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6>Liste des chaînes</h6>
+                </div>
+                <div class="modal-body">
+
+                    @forelse(\App\Setting::get('channels') as $freq => $channel)
+                        <button class="btn btn-outline-dark btn-channel" data-freq="{{ $freq }}">{{$channel['name']}} ({{$freq}})</button>
+                    @empty
+                        Aucune chaine
+                    @endforelse
                 </div>
 
 

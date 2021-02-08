@@ -26,7 +26,17 @@ body, html{
     -webkit-transition: .2s;
     transition: opacity .2s;
 }
-
+.btn-show-modal-channel{
+    padding: 2px;
+    border-radius: 5px;
+    font-size: 25px;
+    border: 2px solid lightslategray;
+}
+.btn-show-modal-channel:hover{
+    color: #1d3354;
+    cursor: pointer;
+    border-color: #1d3354;
+}
 .slider:hover {
     opacity: 1;
 }

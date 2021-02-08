@@ -91,6 +91,9 @@ $( document ).ready(function() {
     $('.btn-kill-process').on('click', function(){
         sendAjaxKillCommand();
     });
+    $('.btn-channel').on('click', function(){
+        sendAjaxCommand($(this).data('freq'));
+    });
     setInputListener(".frequence", "#slider_frequence");
 
     function showError(msg){
@@ -121,7 +124,7 @@ $( document ).ready(function() {
             },
             function(data){
                 data = JSON.parse(data);
-                if($(".live_freq").text() !== data.freq_in_use){
+                if($(".live_freq").text() != data.freq_in_use){
                     $(".freq_in_use").text(data.freq_in_use);
                     $('#slider_frequence').val(data.freq_in_use);
                     $('.radio-name').text(data.radio_name);
